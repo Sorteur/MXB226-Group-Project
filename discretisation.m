@@ -1,4 +1,4 @@
-function [A,b] = Discretisation(A,b)
+function [A,b] = discretisation(A,b)
 
     %% For Bottom Boundary
     % (2-5)
