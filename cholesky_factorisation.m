@@ -15,3 +15,4 @@ for j = 1:n
 end
 A = triu(A);
 end
+
