@@ -24,21 +24,5 @@ for i = n:-1:1
     end
 end
 
-%% Untouched
-% n = size(A, 2);
-% 
-% %initialise output
-% x = b;
-% 
-% %loop rows
-% for i = n:-1:1
-%     %loop columns
-%     for j = i+1:n
-%         x(i) = x(i) - A(i,j) * x(j);
-%     end
-%     %divide by diagonal element
-%     x(i) = x(i) / A(i,i);
-% end
-% end
 end
 
