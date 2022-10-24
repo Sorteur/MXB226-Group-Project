@@ -129,11 +129,13 @@ function [A,b] = discretisation(A,b)
     
     %% Creating b
 
+    ambient = 20;
+
     b(6) = 40;
     b(12) = 40;
     b(18) = 40;
     
-    b(24) = 4/(3*sin(3*pi/8)) - (40*cot(3*pi/8)) + 40;
+    b(24) = 4/(3*sin(3*pi/8)) - (40*cot(3*pi/8)) + 40; % make dependent 
     
     b(29) = (4*sqrt(2))/3;
     
