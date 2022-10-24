@@ -1,4 +1,4 @@
-function x = forward_substitution_rowpacked(u, b, divide)
+function x = forward_substitution_rowpacked(A, b)
 %Forward substitution
 %Returns x for Ax=b for lower triangular system
 
@@ -6,7 +6,7 @@ if nargin < 3
     divide = true;
 end
 
-n = size(A, 2);
+n = 33;
 
 %initialise output
 x = b;
@@ -16,16 +16,12 @@ p = 1;
 for i = 1:n
     %loop columns
     for j = 1:i-1
-        x(i) = x(i) - u(i,j) * x(j);
+        x(i) = x(i) - A(p) * x(j);
         p = p + 1;
     end
-    if divide
-        %divide by diagonal element
-        x(i) = x(i) / u(i,i);
-        p = p + 1; 
-    end
-end
+    %divide by diagonal element
+    x(i) = x(i) / A(p);
+    p = p + 1;
 end
 
-
-
+end
