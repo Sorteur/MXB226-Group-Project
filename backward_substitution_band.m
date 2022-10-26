@@ -1,13 +1,11 @@
 function x = backward_substitution_band(A, b, divide)
 %Backward substitution
-%Returns x for Ax=b for upper triangular system
-
+%Returns x for Ax=b for banded system
 if nargin < 3
     divide = true;
 end
 
-n = size(A, 2);
-m = size(b,2);
+[m,n]= size(A);
 
 %initialise output
 x = b;
@@ -16,13 +14,13 @@ x = b;
 for i = n:-1:1
     %loop columns
     for j = i+1:n
-        x(i,1:m) = x(i,1:m) - A(i,j) * x(j,1:m);
+        if i+(m-j)>0
+            x(i) = x(i) - A(i+(m-j),j) * x(j);
+        end
     end
     if divide
         %divide by diagonal element
-        x(i,1:m) = x(i,1:m) / A(i,i);
+        x(i) = x(i) / A(m,i);
     end
 end
-
 end
-
