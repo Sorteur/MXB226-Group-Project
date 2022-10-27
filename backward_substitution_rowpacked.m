@@ -1,29 +1,25 @@
-function x = backward_substitution_rowpacked(u, b, divide)
+function x = backward_substitution_rowpacked(A, b, divide)
 %Backward substitution
 
 if nargin < 3
     divide = true;
 end
 
-n = size(u);
+n = size(b,2);
 
 %initialise output
 x = b;
-p = n*(n+1)/2;
 
 %loop rows
 for i = n:-1:1
     %loop columns
-    for j = n:-1:i+1
-        x(i) = x(i) - u(p) * x(j);
-        p = p - 1;
+    for j = i+1:n
+        x(i,1:m) = x(i,1:m) - A(i,j) * x(j,1:m);
     end
     if divide
         %divide by diagonal element
-        x(i) = x(i) / u(p);
-        p = p - 1;
+        x(i,1:m) = x(i,1:m) / A(i,i);
     end
 end
 
 end
-
