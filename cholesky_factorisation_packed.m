@@ -1,23 +1,23 @@
-function A = cholesky_factorisation_packed(A, a)
+function A = cholesky_factorisation_packed(A)
 % performs Cholesky factorisation on SPD matrix A
 
-n = size(A,1);
-
+n = 33;
 % this needs to go in somewhere
-%A(i,j) = a(i+j*(j-1)/2)  %i ≤ j 
+%A(i,j) = A(i+j*(j-1)/2)  %i ≤ j 
+%A(i,i) = A(i+i*(i-1)/2)
+%A(j,j) = A(j+j*(j-1)/2)
+
 
 for j = 1:n
     for i = 1:j-1
         for k = 1:i-1
-            A(i,j) = A(i,j) - A(k,i)*A(k,j);
+            A(i+(j*(j-1)/2)) = A(i+(j*(j-1)/2)) - A(k+(i*(i-1)/2))*A(k+(j*(j-1)/2));
         end
-        A(i,j) = A(i,j) / A(i,i);
-        A(j,j) = A(j,j) - A(i,j)^2 ;
+        A(i+(j*(j-1)/2)) = A(i+(j*(j-1)/2)) / A(i+(i*(i-1)/2));
+        A(j+(j*(j-1)/2)) = A(j+(j*(j-1)/2)) - A(i+(j*(j-1)/2))^2 ;
+        
     end
-    A(j,j) = sqrt(A(j,j));
+    A(j+(j*(j-1)/2)) = sqrt(A(j+(j*(j-1)/2)));
 end
-A = triu(A);
 end
-
-
 
