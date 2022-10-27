@@ -1,4 +1,4 @@
-function [A,b] = discretisation(A,b)
+function [A,b] = discretisation(A,b,ambient)
 
     %% For Bottom Boundary
     % (2-5)
@@ -13,7 +13,6 @@ function [A,b] = discretisation(A,b)
         A(6,6) = 3;
         A(6,12) = -1;
         A(6,5) = -1;
-        %b = 40
     
     %% For Side Boundary
     % (bottom 4)
@@ -29,7 +28,6 @@ function [A,b] = discretisation(A,b)
     A(30,30) = 3;
     A(30,31) = -1;
     A(30,25) = -1;
-    %b = 70
     
     % 25
     A(25,25) = 3;
@@ -53,7 +51,6 @@ function [A,b] = discretisation(A,b)
     A(i,i-1) = -1;
     A(i,i-6) = -1;
     A(i,i+6) = -1;
-    %b = 40
     
     % (second row)
     for i = 14:17
@@ -69,7 +66,6 @@ function [A,b] = discretisation(A,b)
     A(18,17) = -1;
     A(18,12) = -1;
     A(18,24) = -1;
-    %b = 40
     
     % (third row)
     for i = 20:23
@@ -96,7 +92,6 @@ function [A,b] = discretisation(A,b)
         A(i,i+1) = -1;
         A(i,i-5) = -1;
     end
-    %b = 70
     
     %% For Extras
     % 1
@@ -109,41 +104,32 @@ function [A,b] = discretisation(A,b)
     A(24,24) = (3+(0.2/(3*sin((3*pi)/8)))-(cot((3*pi)/8)));
     A(24,18) = -1;
     A(24,23) = -1;
-    %Set b = 4/(3*sin(3pi/8)) - (40cot(3pi/8)) + 40
     
     % 29
-    A(29,29) = ((0.2*sqrt(2))/3)+2;
+    A(29,29) = (30+sqrt(2))/15;
     A(29,23) = -1;
     A(29,28) = -1;
-    %b = (4root(2))/3
-    
     
     % 33
     A(33,33) = (3+(0.2/(3*sin((3*pi)/8)))-(cot((3*pi)/8)));
     A(33,28) = -1;
-    A(33,32) = -1;
-    %Set b = 4/(3*sin(3pi/8)) - (70cot(3pi/8)) + 70
-    
-    
-    
+    A(33,32) = -1;  
     
     %% Creating b
-
-    ambient = 20;
 
     b(6) = 40;
     b(12) = 40;
     b(18) = 40;
     
-    b(24) = 4/(3*sin(3*pi/8)) - (40*cot(3*pi/8)) + 40; % make dependent 
+    b(24) =  40 + ambient*(1/(15*sin(3*pi/8))) - 40*cot(3*pi/8);
     
-    b(29) = (4*sqrt(2))/3;
+    b(29) = ambient*(sqrt(2)/15);
     
     b(30) = 70;
     b(31) = 70;
     b(32) = 70;
     
-    b(33) = 4/(3*sin(3*pi/8)) - (70*cot(3*pi/8)) + 70;
+    b(33) = 70 + ambient*(1/(15*sin(3*pi/8))) - 70*cot(3*pi/8);
     
     
 end
