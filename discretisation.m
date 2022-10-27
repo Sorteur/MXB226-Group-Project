@@ -1,4 +1,4 @@
-function [A,b] = discretisation(A,b)
+function [A,b] = discretisation(A,b,ambient)
 
     %% For Bottom Boundary
     % (2-5)
@@ -116,8 +116,6 @@ function [A,b] = discretisation(A,b)
     A(33,32) = -1;  
     
     %% Creating b
-
-    ambient = 20;
 
     b(6) = 40;
     b(12) = 40;
