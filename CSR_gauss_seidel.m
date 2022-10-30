@@ -33,7 +33,7 @@ while (k < maxiters) && (res > tol)
     for i = 1:n
         Ax(i) = 0;
         for j = Rb(i):Rb(i+1)-1
-            Ax(i) = Ax(i) - Acsr(j)*x(C(j));
+            Ax(i) = Ax(i) + Acsr(j)*x(C(j));
         end
     end
     k = k + 1;
